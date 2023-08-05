@@ -11,6 +11,11 @@ window.addEventListener("DOMContentLoaded", async () => {
 
     const allProducts = res.data.products;
 
+    // creating row element once
+    const rowEl = document.createElement("div");
+    rowEl.className = "row g-3 py-4";
+    productList.appendChild(rowEl);
+
     allProducts.forEach((product) => {
       const discountedPrice = (
         product.price -
@@ -18,8 +23,10 @@ window.addEventListener("DOMContentLoaded", async () => {
       ).toFixed(2);
 
       const productDes = shorten(product.description, 60);
+
+      // creating product card
       const divEl = document.createElement("div");
-      divEl.className = "col-md-6 col-lg-4 col-xl-3";
+      divEl.className = "col-md-6 col-lg-4 col-xl-3 ";
       divEl.innerHTML = `<div class="p-3 border bg-white rounded-2">
       <!-- Item Start -->
       <div class="overflow-hidden d-flex border" style="height: 250px; background-image: url(${product.thumbnail});
@@ -59,7 +66,7 @@ window.addEventListener("DOMContentLoaded", async () => {
       <!-- Item End -->
     </div>`;
 
-      productList.appendChild(divEl);
+      rowEl.appendChild(divEl);
     });
   } catch (err) {
     console.log(err.message);
